@@ -63,28 +63,28 @@ namespace DatabaseActivity
             }
         }
 
-        static void ExcluirAlunoPorNome(string nome)
-        {
-            using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
-            {
-                connection.Open();
-                string query = "DELETE FROM aluno WHERE nome = @nome";
+        //static void ExcluirAlunoPorNome(string nome)
+        //{
+        //    using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
+        //    {
+        //        connection.Open();
+        //        string query = "DELETE FROM aluno WHERE nome = @nome";
 
-                using (NpgsqlCommand command = new NpgsqlCommand(query, connection))
-                {
-                    command.Parameters.AddWithValue("@nome", nome);
+        //        using (NpgsqlCommand command = new NpgsqlCommand(query, connection))
+        //        {
+        //            command.Parameters.AddWithValue("@nome", nome);
 
-                    int rowsAffected = command.ExecuteNonQuery();
-                    if (rowsAffected > 0)
-                    {
-                        Console.WriteLine($"Aluno {nome} excluído com sucesso!");
-                    }
-                    else
-                    {
-                        Console.WriteLine($"Aluno {nome} não encontrado ou não pôde ser excluído.");
-                    }
-                }
-            }
-        }
+        //            int rowsAffected = command.ExecuteNonQuery();
+        //            if (rowsAffected > 0)
+        //            {
+        //                Console.WriteLine($"Aluno {nome} excluído com sucesso!");
+        //            }
+        //            else
+        //            {
+        //                Console.WriteLine($"Aluno {nome} não encontrado ou não pôde ser excluído.");
+        //            }
+        //        }
+        //    }
+        //}
     }
 }
