@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Runtime.ConstrainedExecution;
 using Npgsql;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace DatabaseActivity
 {
@@ -25,9 +27,19 @@ namespace DatabaseActivity
 
                 using (NpgsqlCommand command = new NpgsqlCommand(query, connection))
                 {
-                    command.Parameters.AddWithValue("@nome", nome);
-                    command.Parameters.AddWithValue("@email", email);
-                    command.Parameters.AddWithValue("@senha", senha);
+                    command.Parameters.AddWithValue(@matricula, matricula);
+                    command.Parameters.AddWithValue(@nome, nome);
+                    command.Parameters.AddWithValue(@data_nascimemento, data_nascimemento);
+                    command.Parameters.AddWithValue(@email, email);
+                    command.Parameters.AddWithValue(@tipo_logradouro, tipo_logradouro);
+                    command.Parameters.AddWithValue(@nome_logradouro, nome_logradouro);
+                    command.Parameters.AddWithValue(@numero, numero);
+                    command.Parameters.AddWithValue(@bairro, bairro);
+                    command.Parameters.AddWithValue(@cidade, cidade);
+                    command.Parameters.AddWithValue(@uf, uf);
+                    command.Parameters.AddWithValue(@cep, cep);
+                    command.Parameters.AddWithValue(@telefone, telefone);
+                    command.Parameters.AddWithValue(@cpf, cpf);
 
                     int rowsAffected = command.ExecuteNonQuery();
                     if (rowsAffected > 0)
@@ -57,6 +69,7 @@ namespace DatabaseActivity
                     {
                         string nome = reader.GetString(0);
                         string email = reader.GetString(1);
+
                         Console.WriteLine($"Nome: {nome}, Email: {email}");
                     }
                 }
