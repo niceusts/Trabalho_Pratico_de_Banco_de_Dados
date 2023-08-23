@@ -12,7 +12,7 @@ namespace DatabaseActivity
 
         static void Main(string[] args)
         {
-            InserirAluno("123456", "Niceu Santos Biriba", "01-01-0001" , "email", "tipo_logradouro", "nome_logradouro", "numero", "bairro", "cidade", "uf", "cep", "telefone", "cpf");
+            InserirAluno("1234567891112", "Niceu Santos Biriba", "01-01-0001" , "email", "tipo_logradouro", "nome_logradouro", "numero", "bairro", "cidade", "uf", "cep", "telefone", "cpf");
 
             //ExcluirAlunoPorNome("Miguel SObrinho");
             //ConsultarAlunos();
