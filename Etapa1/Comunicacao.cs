@@ -1,35 +1,36 @@
 ﻿using System;
 using System.Runtime.ConstrainedExecution;
 using Npgsql;
+using NpgsqlTypes;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace DatabaseActivity
 {
     class Program
     {
-        static string connectionString = "Host=localhost;Port=5432;Username=niceu;Password=2050;Database=UfsCommerce;";
+        static string connectionString = "Host=ufsconnect.cyxm3yeteyof.us-east-1.rds.amazonaws.com;Port=5432;Username=niceu;Password=dbBiriba2023.1;Database=ufsconnect;SearchPath=ufsconnect;";
 
         static void Main(string[] args)
         {
-            InserirAluno("Miguel Sobrinho", "miguel@example.com", "senha123");
+            InserirAluno("123456", "Niceu Santos Biriba", "01-01-0001" , "email", "tipo_logradouro", "nome_logradouro", "numero", "bairro", "cidade", "uf", "cep", "telefone", "cpf");
 
             //ExcluirAlunoPorNome("Miguel SObrinho");
-            ConsultarAlunos();
+            //ConsultarAlunos();
 
         }
 
-        static void InserirAluno(string nome, string email, string senha)
+        static void InserirAluno(string matricula, string nome, string data_nascimemento, string email, string tipo_logradouro, string nome_logradouro, string numero, string bairro, string cidade, string uf, string cep, string telefone, string cpf)
         {
             using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
             {
                 connection.Open();
-                string query = "INSERT INTO aluno (nome, email, senha) VALUES (@nome, @email, @senha)";
+                string query = "INSERT INTO ufsconnect.aluno (matricula, nome, data_nascimemento, email, tipo_logradouro, nome_logradouro, numero, bairro, cidade, uf, cep, telefone, cpf) VALUES (@matricula, @nome, @data_nascimemento, @email, @tipo_logradouro, @nome_logradouro, @numero, @bairro, @cidade, @uf, @cep, @telefone, @cpf)";
 
                 using (NpgsqlCommand command = new NpgsqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue(@matricula, matricula);
                     command.Parameters.AddWithValue(@nome, nome);
-                    command.Parameters.AddWithValue(@data_nascimemento, data_nascimemento);
+                    command.Parameters.AddWithValue(@data_nascimemento.ToString(), data_nascimemento);
                     command.Parameters.AddWithValue(@email, email);
                     command.Parameters.AddWithValue(@tipo_logradouro, tipo_logradouro);
                     command.Parameters.AddWithValue(@nome_logradouro, nome_logradouro);
@@ -54,27 +55,28 @@ namespace DatabaseActivity
             }
         }
 
-        static void ConsultarAlunos()
-        {
-            using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
-            {
-                connection.Open();
-                string query = "SELECT nome, email FROM aluno";
+        //static void ConsultarAlunos()
+        //{
+        //    using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
+        //    {
+        //        connection.Open();
+        //        string query = "SELECT nome, email FROM aluno";
 
-                using (NpgsqlCommand command = new NpgsqlCommand(query, connection))
-                using (NpgsqlDataReader reader = command.ExecuteReader())
-                {
-                    Console.WriteLine("Alunos:");
-                    while (reader.Read())
-                    {
-                        string nome = reader.GetString(0);
-                        string email = reader.GetString(1);
+        //        using (NpgsqlCommand command = new NpgsqlCommand(query, connection))
+        //        using (NpgsqlDataReader reader = command.ExecuteReader())
+        //        {
+        //            Console.WriteLine("Alunos:");
+        //            while (reader.Read())
+        //            {
+        //                string nome = reader.GetString(0);
+        //                //string email = reader.GetString(1);
 
-                        Console.WriteLine($"Nome: {nome}, Email: {email}");
-                    }
-                }
-            }
-        }
+        //                Console.WriteLine($"Nome: {nome}");
+        //                //Console.WriteLine($"Nome: {nome}, Email: {email}");
+        //            }
+        //        }
+        //    }
+        //}
 
         //static void ExcluirAlunoPorNome(string nome)
         //{
